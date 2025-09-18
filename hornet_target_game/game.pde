@@ -5,6 +5,9 @@ float hornetheight = 70;
 float vy;
 float ay = 0.1;
 
+float targetsiny = 0;
+float targetsinx = 0;
+
 float targetx;
 float targety;
 
@@ -13,11 +16,14 @@ float daggery;
 
 int stage = 1;
 
+boolean coordsSet;
+
 void game() {
   background(#9B7B8B);
   hornet();
   ground();
   vy += ay*1.6;
+
   
   if (hornety < 530) { // start falling
     vy += ay;
@@ -48,16 +54,47 @@ void game() {
     target();
   }
   
-  //if (stage == 6) {
-  //  targetx += 20;
-  //  if (targetx >= targx[stage]) {
-  //    targetx -= 3;
-  //  }
-  //}
+  
+  if (stage >= 6 && coordsSet == false) { // so the random coords are set and don't stay there
+    targetx = targx[stage];
+    targety = targy[stage];
+    coordsSet = true;
+  }
+  
+  
+  if (stage == 6) {
+    target();
+    targety += sin(targetsiny)*3; // range of bob (but it affects speed so dont touch speed)
+    targetsiny += 0.03; // speed of bob (lower speed = higher range)
+  }
+  if (stage == 7) {
+    target();
+    targety += sin(targetsiny)*6;
+    targetsiny += 0.04;
+  }
+  if (stage == 8) {
+    target();
+    targety += sin(targetsiny)*10; 
+    targetsiny += 0.05; 
+  }
+  if (stage == 9) {
+    target();
+    targety += sin(targetsiny)*12; 
+    targetsiny += 0.05; 
+  }
+  
+  if (stage == 10) {
+    target();
+    targety += sin(targetsiny)*5;
+    targetsiny += 0.05;
+    targetx += sin(targetsinx)*5;
+    targetsinx += 0.05;
+  }
   
   
   if (dist(daggerx+60,daggery, targetx,targety-30) <= 40) {
     chuck = false;
+    coordsSet = false;
     daggerx = hornetx;
     stage += 1;
     print("hit");

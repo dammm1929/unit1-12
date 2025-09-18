@@ -15,10 +15,19 @@ void setup() {
     targy[i] = random(200,550);
   }
   
-  
-  for (int i = 5; i <= 10; i++) { // assign coordinates for stages after 5 (smaller area)
+  for (int i = 5; i <= 7; i++) { // assign coordinates for stages 5-7 (smaller area)
     targx[i] = random(400,800);
-    targy[i] = random(300,450);
+    targy[i] = random(200,300);
+  }
+  
+  for (int i = 7; i <= 9; i++) { // assign coordinates for stages after 7-9 (even smaller area)
+    targx[i] = random(400,800);
+    targy[i] = random(250,260);
+  }
+  
+  for (int i = 9; i <= 13; i++) { // assign coordinates for stages after 7-9 (even smaller area)
+    targx[i] = random(400,800);
+    targy[i] = random(250,300);
   }
 }
 
